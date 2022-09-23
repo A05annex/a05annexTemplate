@@ -8,7 +8,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import org.a05annex.frc.A05Robot;
 
 
 /**
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot
+public class Robot extends A05Robot
 {
     private Command autonomousCommand;
     
@@ -31,9 +31,17 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+
+        Constants.setCameras(Constants.HAS_USB_CAMERA, Constants.HAS_LIMELIGHT);
+        Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
+        Constants.setDriveGeometry(Constants.DRIVE_LENGTH, Constants.DRIVE_WIDTH);
+        Constants.setDriveCalibration(Constants.SwerveCalibrationValues.RF, Constants.SwerveCalibrationValues.RR,
+                Constants.SwerveCalibrationValues.LF, Constants.SwerveCalibrationValues.LR);
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
+
+        setRobotContainer(robotContainer);
     }
     
     
