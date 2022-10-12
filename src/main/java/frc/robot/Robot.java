@@ -31,12 +31,9 @@ public class Robot extends A05Robot
     @Override
     public void robotInit()
     {
-
-        Constants.setCameras(Constants.HAS_USB_CAMERA, Constants.HAS_LIMELIGHT);
+        // Set the drive constants that are specific to this swerve geometry.
+        // Some drive geometry is passed in RobotContainer's constructer
         Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
-        Constants.setDriveGeometry(Constants.DRIVE_LENGTH, Constants.DRIVE_WIDTH);
-        Constants.setDriveCalibration(Constants.SwerveCalibrationValues.RF, Constants.SwerveCalibrationValues.RR,
-                Constants.SwerveCalibrationValues.LF, Constants.SwerveCalibrationValues.LR);
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
@@ -59,7 +56,9 @@ public class Robot extends A05Robot
         // commands, running already-scheduled commands, removing finished or interrupted commands,
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
-        CommandScheduler.getInstance().run();
+        super.robotPeriodic();
+
+
     }
     
     

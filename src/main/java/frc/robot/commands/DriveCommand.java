@@ -1,17 +1,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants;
-import org.a05annex.frc.NavX;
 import org.a05annex.frc.commands.A05DriveCommand;
-import org.a05annex.frc.subsystems.DriveSubsystem;
-import org.a05annex.util.AngleD;
-import org.a05annex.util.AngleUnit;
-import org.a05annex.util.Utl;
 
-
+/**
+ * Drive command is here because you will likely need to override the serve (targeting, competition specific reason)
+ */
 public class DriveCommand extends A05DriveCommand {
 
     /**
@@ -32,17 +26,9 @@ public class DriveCommand extends A05DriveCommand {
 
     @Override
     public void execute() {
-        conditionStick();
-
-        // speed math
-        double speed = computeSpeedFromStick();
-
-        // rotate math
-        double rotation = computeRotationFromStick(speed);
-
-        // find direction, if speed is close to 0 rotation will be zeroed
-        AngleD direction = new AngleD(AngleUnit.RADIANS, Math.atan2(m_stickX, m_stickY));
-
-        m_driveSubsystem.swerveDriveFieldRelative(direction, speed, rotation);
+        //TODO: If you want to do special control like targeting, comment out super.execute() and add your own control code
+        //TODO: Refer to the documentation. Much of the code you want to run is already packaged in callable methods
+        //This runs the default swerve calculations for xbox control
+        super.execute();
     }
 }

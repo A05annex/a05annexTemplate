@@ -6,6 +6,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.XboxController;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public final class Constants extends A05Constants
 {
-    public static final class CAN_Devices extends A05CAN_Devices {
+    public static final class CAN_Devices {
         /*
         public static final int
                 // Non-Drive Motors
@@ -38,8 +39,11 @@ public final class Constants extends A05Constants
         DRIVE_XBOX_PORT = 0 (Set in A05Constants)
         Port 0 is whichever controller was plugged in first, not a specific port.
     */
+    //TODO: Comment in if you want 2nd controller, you also need to uncomment something in RobotContainer
     //public static final int ALT_XBOX_PORT = 1; // 2nd Controller for more controls
 
+    public static final XboxController.Axis INCREASE_GAIN_AXIS = XboxController.Axis.kRightTrigger;
+    public static final XboxController.Axis DECREASE_GAIN_AXIS = XboxController.Axis.kLeftTrigger;
 
     // for prototype, length and width from center of the wheels, in m (note chassis is 30" square,
     // the bolt pattern is 29" square, wheels are 2.75" in from the bolt pattern or centered on the
@@ -56,37 +60,37 @@ public final class Constants extends A05Constants
     public static double DRIVE_ORIENTATION_kP = 0.3;
 
     //TODO: Calibrate and comment date of calibration
-    public static final class SwerveCalibrationValues {
+    public static final class CalibrationOffset {
         public static final double
                 // RF = Right Front, LR = Left Rear, etc
-                RF = 0.000,
-                RR = 0.000,
-                LR = 0.000,
-                LF = 0.000;
+                RF = 0.785,
+                RR = 0.357,
+                LR = 2.519,
+                LF = 0.563;
     }
 
 
     //TODO: Comment out if the robot does not have auto/driver selection switches
 
-    // Digital input switchboard
-    private static final DigitalInput switch0 = new DigitalInput(4);
-    private static final DigitalInput switch1 = new DigitalInput(3);
-    private static final DigitalInput switch2 = new DigitalInput(2);
-    private static final DigitalInput switch3 = new DigitalInput(1);
-    private static final DigitalInput switch4 = new DigitalInput(0);
-
-    public static int readDriverID() {
-        return (switch0.get() ? 0 : 1) + (switch1.get() ? 0 : 2);
-    }
-
-    public static int readAutoID() {
-        return (switch2.get() ? 0 : 1) + (switch3.get() ? 0 : 2) + (switch4.get() ? 0 : 4);
-    }
-
-    public static void printIDs() {
-        SmartDashboard.putNumber("driver", readDriverID());
-        SmartDashboard.putNumber("auto", readAutoID());
-    }
+//    // Digital input switchboard
+//    private static final DigitalInput switch0 = new DigitalInput(4);
+//    private static final DigitalInput switch1 = new DigitalInput(3);
+//    private static final DigitalInput switch2 = new DigitalInput(2);
+//    private static final DigitalInput switch3 = new DigitalInput(1);
+//    private static final DigitalInput switch4 = new DigitalInput(0);
+//
+//    public static int readDriverID() {
+//        return (switch0.get() ? 0 : 1) + (switch1.get() ? 0 : 2);
+//    }
+//
+//    public static int readAutoID() {
+//        return (switch2.get() ? 0 : 1) + (switch3.get() ? 0 : 2) + (switch4.get() ? 0 : 4);
+//    }
+//
+//    public static void printIDs() {
+//        SmartDashboard.putNumber("driver", readDriverID());
+//        SmartDashboard.putNumber("auto", readAutoID());
+//    }
 
 
     // Connect values to SmartDashboard, if you change the value in smart dashboard it changes the const (speed adjusting etc)

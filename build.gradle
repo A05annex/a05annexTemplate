@@ -55,8 +55,8 @@ test {
 
 dependencies {
 
-    implementation 'org.a05annex:a05annexUtil:0.9.4'
-    implementation 'org.a05annex:a05annexRobot:0.0.1'
+    //implementation 'org.a05annex:a05annexUtil:0.9.4'
+    //implementation 'org.a05annex:a05annexRobot:0.0.1'
     implementation 'org.jetbrains:annotations:17.0.0'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -8,10 +8,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.DriveCommand;
 import org.a05annex.frc.A05RobotContainer;
-
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,14 +22,45 @@ import org.a05annex.frc.A05RobotContainer;
 public class RobotContainer extends A05RobotContainer
 {
     // The robot's subsystems and commands are defined here...
-    private final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-    
-    private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
-    
-    
+    // NavX, DriveSubsystem, DriveXbox have already been made in A05RobotContainer
+    //TODO: Add any additional subsystems and commands here
+
+    private Command m_autonomousCommand = null;
+
+    //TODO: Uncomment if you have alternate xbox controller, you need to uncomment a constant too
+    //XboxController m_altXbox = new XboxController(Constants.ALT_XBOX_PORT);
+
+    // controller button declarations
+    JoystickButton m_xboxA = new JoystickButton(m_driveXbox, 1);
+    JoystickButton m_xboxB = new JoystickButton(m_driveXbox, 2);
+    JoystickButton m_xboxX = new JoystickButton(m_driveXbox, 3);
+    JoystickButton m_xboxY = new JoystickButton(m_driveXbox, 4);
+    JoystickButton m_xboxLeftBumper = new JoystickButton(m_driveXbox, 5);
+    JoystickButton m_xboxRightBumper = new JoystickButton(m_driveXbox, 6);
+    JoystickButton m_xboxBack = new JoystickButton(m_driveXbox, 7);
+    JoystickButton m_xboxStart = new JoystickButton(m_driveXbox, 8);
+    JoystickButton m_xboxLeftStickPress = new JoystickButton(m_driveXbox, 9);
+    JoystickButton m_xboxRightStickPress = new JoystickButton(m_driveXbox, 10);
+
+    // alt xbox controller buttons
+    //JoystickButton m_altXboxA = new JoystickButton(m_altXbox, 1);
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer()
     {
+        super();
+        // finish swerve drive initialization for this specific robt.
+        m_driveSubsystem.setDriveGeometry(Constants.DRIVE_LENGTH, Constants.DRIVE_WIDTH,
+                Constants.CalibrationOffset.RF, Constants.CalibrationOffset.RR,
+                Constants.CalibrationOffset.LF, Constants.CalibrationOffset.LR);
+
+        m_driveCommand = new DriveCommand(m_driveXbox);
+
+        m_driveSubsystem.setDefaultCommand(m_driveCommand);
+
+
+        //TODO: add auto
+
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -45,6 +76,8 @@ public class RobotContainer extends A05RobotContainer
     {
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
+
+        m_xboxBack.whenPressed(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
     }
     
     
@@ -56,6 +89,6 @@ public class RobotContainer extends A05RobotContainer
     public Command getAutonomousCommand()
     {
         // An ExampleCommand will run in autonomous
-        return autoCommand;
+        return m_autonomousCommand;
     }
 }
