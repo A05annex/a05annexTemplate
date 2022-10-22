@@ -69,29 +69,9 @@ public final class Constants extends A05Constants
                 LF = 0.563;
     }
 
-
-    //TODO: Comment out if the robot does not have auto/driver selection switches
-
-//    // Digital input switchboard
-//    private static final DigitalInput switch0 = new DigitalInput(4);
-//    private static final DigitalInput switch1 = new DigitalInput(3);
-//    private static final DigitalInput switch2 = new DigitalInput(2);
-//    private static final DigitalInput switch3 = new DigitalInput(1);
-//    private static final DigitalInput switch4 = new DigitalInput(0);
-//
-//    public static int readDriverID() {
-//        return (switch0.get() ? 0 : 1) + (switch1.get() ? 0 : 2);
-//    }
-//
-//    public static int readAutoID() {
-//        return (switch2.get() ? 0 : 1) + (switch3.get() ? 0 : 2) + (switch4.get() ? 0 : 4);
-//    }
-//
-//    public static void printIDs() {
-//        SmartDashboard.putNumber("driver", readDriverID());
-//        SmartDashboard.putNumber("auto", readAutoID());
-//    }
-
+    public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
+            new A05Constants.AutonomousPath("Sample Path", 0, "samplePath.json")
+    };
 
     // Connect values to SmartDashboard, if you change the value in smart dashboard it changes the const (speed adjusting etc)
     // By having two methods, you can optionally add the bounds

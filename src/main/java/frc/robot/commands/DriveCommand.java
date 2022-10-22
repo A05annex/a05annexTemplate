@@ -1,7 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.commands.A05DriveCommand;
+import org.a05annex.util.AngleD;
+import org.a05annex.util.AngleUnit;
 
 /**
  * Drive command is here because you will likely need to override the serve (targeting, competition specific reason)
@@ -29,6 +32,14 @@ public class DriveCommand extends A05DriveCommand {
         //TODO: If you want to do special control like targeting, comment out super.execute() and add your own control code
         //TODO: Refer to the documentation. Much of the code you want to run is already packaged in callable methods
         //This runs the default swerve calculations for xbox control
-        super.execute();
+        //super.execute();
+
+        conditionStick();
+        m_driveSubsystem.swerveDriveFieldRelative(m_conditionedDirection, m_conditionedSpeed, m_conditionedRotate);
+
+        SmartDashboard.putNumber("Drive Forward", m_conditionedSpeed*(new AngleD(m_conditionedDirection).subtract(m_navx.getHeading()).cos()));
+        SmartDashboard.putNumber("Drive Strafe: ", m_conditionedSpeed*(new AngleD(m_conditionedDirection).subtract(m_navx.getHeading()).sin()));
+        SmartDashboard.putNumber("Rotation:", m_conditionedRotate);
+        SmartDashboard.putNumber("NavX", m_navx.getHeading().getDegrees());
     }
 }

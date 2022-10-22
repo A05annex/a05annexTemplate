@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.DriveCommand;
 import org.a05annex.frc.A05RobotContainer;
+import org.a05annex.frc.commands.A05DriveCommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -55,6 +56,12 @@ public class RobotContainer extends A05RobotContainer
                 Constants.CalibrationOffset.LF, Constants.CalibrationOffset.LR);
 
         m_driveCommand = new DriveCommand(m_driveXbox);
+
+        //TODO: Use these if you want custom drive sensitivity
+//        A05DriveCommand.DRIVE_SPEED_GAIN = 0.7D;
+//        A05DriveCommand.DRIVE_SPEED_SENSITIVITY = 2.0D;
+//        A05DriveCommand.ROTATE_GAIN = 0.5D;
+//        A05DriveCommand.ROTATE_SENSITIVITY = 1.5D;
 
         m_driveSubsystem.setDefaultCommand(m_driveCommand);
 

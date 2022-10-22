@@ -8,6 +8,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.A05Robot;
 
 
@@ -19,10 +20,6 @@ import org.a05annex.frc.A05Robot;
  */
 public class Robot extends A05Robot
 {
-    private Command autonomousCommand;
-    
-    private RobotContainer robotContainer;
-    
     
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -32,13 +29,17 @@ public class Robot extends A05Robot
     public void robotInit()
     {
         // Set the drive constants that are specific to this swerve geometry.
-        // Some drive geometry is passed in RobotContainer's constructer
+        // Some drive geometry is passed in RobotContainer's constructor
         Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
+
+        // Load the autonomous path list
+        for (int i = 0; i < Constants.AUTONOMOUS_PATHS.length; i++) {
+            A05Constants.AUTONOMOUS_PATH_LIST.add(Constants.AUTONOMOUS_PATHS[i]);
+        }
+
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        robotContainer = new RobotContainer();
-
-        setRobotContainer(robotContainer);
+        setRobotContainer(new RobotContainer());
     }
     
     
@@ -75,13 +76,9 @@ public class Robot extends A05Robot
     @Override
     public void autonomousInit()
     {
-        autonomousCommand = robotContainer.getAutonomousCommand();
-        
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null)
-        {
-            autonomousCommand.schedule();
-        }
+        // Sets up autonomous command
+        super.autonomousInit();
+        //TODO: Add other things here (setting limelight pipeline)
     }
     
     
@@ -93,14 +90,9 @@ public class Robot extends A05Robot
     @Override
     public void teleopInit()
     {
-        // This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autonomousCommand != null)
-        {
-            autonomousCommand.cancel();
-        }
+        // Cancels autonomous command
+        super.teleopInit();
+        //TODO: Can add other things here
     }
     
     
