@@ -26,8 +26,6 @@ public class RobotContainer extends A05RobotContainer
     // NavX, DriveSubsystem, DriveXbox have already been made in A05RobotContainer
     //TODO: Add any additional subsystems and commands here
 
-    private Command m_autonomousCommand = null;
-
     //TODO: Uncomment if you have alternate xbox controller, you need to uncomment a constant too
     //XboxController m_altXbox = new XboxController(Constants.ALT_XBOX_PORT);
 
@@ -85,17 +83,5 @@ public class RobotContainer extends A05RobotContainer
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
 
         m_xboxBack.whenPressed(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
-    }
-    
-    
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
-    public Command getAutonomousCommand()
-    {
-        // An ExampleCommand will run in autonomous
-        return m_autonomousCommand;
     }
 }

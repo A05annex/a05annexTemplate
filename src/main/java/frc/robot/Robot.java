@@ -32,6 +32,8 @@ public class Robot extends A05Robot
         // Some drive geometry is passed in RobotContainer's constructor
         Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
 
+        Constants.setPrintDebug(true);
+
         // Load the autonomous path list
         for (int i = 0; i < Constants.AUTONOMOUS_PATHS.length; i++) {
             A05Constants.AUTONOMOUS_PATH_LIST.add(Constants.AUTONOMOUS_PATHS[i]);

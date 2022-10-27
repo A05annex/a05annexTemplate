@@ -57,7 +57,7 @@ public final class Constants extends A05Constants
     public static final double DRIVE_WIDTH = 0.5969;
 
     // kP for keeping drive at the same orientation
-    public static double DRIVE_ORIENTATION_kP = 0.3;
+    public static double DRIVE_ORIENTATION_kP = 1.2;
 
     //TODO: Calibrate and comment date of calibration
     public static final class CalibrationOffset {
