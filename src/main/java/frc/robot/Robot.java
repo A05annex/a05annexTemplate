@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.A05Robot;
 
+import java.util.Collections;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
@@ -31,39 +33,20 @@ public class Robot extends A05Robot
         // Set the drive constants that are specific to this swerve geometry.
         // Some drive geometry is passed in RobotContainer's constructor
         Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
-
+        // TODO: If you are having trouble debugging an issue related to the a05annexLibrary, setting this to true -
+        // TODO: i.e. uncommenting the following line, will add a lot of debug logging to the console output, and
+        // TODO: may help you determine what is really happening.
         Constants.setPrintDebug(true);
 
         // Load the autonomous path list
-        for (int i = 0; i < Constants.AUTONOMOUS_PATHS.length; i++) {
-            A05Constants.AUTONOMOUS_PATH_LIST.add(Constants.AUTONOMOUS_PATHS[i]);
-        }
+        Collections.addAll(A05Constants.AUTONOMOUS_PATH_LIST,Constants.AUTONOMOUS_PATHS);
 
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
         setRobotContainer(new RobotContainer());
     }
     
-    
-    /**
-     * This method is called every robot packet, no matter the mode. Use this for items like
-     * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-     *
-     * <p>This runs after the mode specific periodic methods, but before LiveWindow and
-     * SmartDashboard integrated updating.
-     */
-    @Override
-    public void robotPeriodic()
-    {
-        // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-        // commands, running already-scheduled commands, removing finished or interrupted commands,
-        // and running subsystem periodic() methods.  This must be called from the robot's periodic
-        // block in order for anything in the Command-based framework to work.
-        super.robotPeriodic();
 
-
-    }
-    
     
     /** This method is called once each time the robot enters Disabled mode. */
     @Override
