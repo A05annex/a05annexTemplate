@@ -53,7 +53,7 @@ public class RobotContainer extends A05RobotContainer
                 Constants.CalibrationOffset.RF, Constants.CalibrationOffset.RR,
                 Constants.CalibrationOffset.LF, Constants.CalibrationOffset.LR);
 
-        m_driveCommand = new DriveCommand(m_driveXbox);
+        m_driveCommand = new DriveCommand(m_driveXbox, m_driver);
 
         //TODO: Use these if you want custom drive sensitivity
 //        A05DriveCommand.DRIVE_SPEED_GAIN = 0.7D;

@@ -73,6 +73,10 @@ public final class Constants extends A05Constants
             new A05Constants.AutonomousPath("Sample Path", 0, "samplePath.json")
     };
 
+    public static final A05Constants.DriverSettings[] DRIVER_SETTINGS = {
+            new A05Constants.DriverSettings("programmer", 0)
+    };
+
     // Connect values to SmartDashboard, if you change the value in smart dashboard it changes the const (speed adjusting etc)
     // By having two methods, you can optionally add the bounds
     /**

@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.commands.A05DriveCommand;
 import org.a05annex.util.AngleD;
 import org.a05annex.util.AngleUnit;
@@ -16,8 +17,8 @@ public class DriveCommand extends A05DriveCommand {
      * Contains driver constants for sensitivity, gain, and deadband.
      * @param xbox (XboxController) The drive xbox controller.
      */
-    public DriveCommand(XboxController xbox) {
-        super(xbox);
+    public DriveCommand(XboxController xbox, A05Constants.DriverSettings driver) {
+        super(xbox, driver);
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
     }
