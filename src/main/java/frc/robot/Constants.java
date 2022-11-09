@@ -42,8 +42,6 @@ public final class Constants extends A05Constants
     //TODO: Comment in if you want 2nd controller, you also need to uncomment something in RobotContainer
     //public static final int ALT_XBOX_PORT = 1; // 2nd Controller for more controls
 
-    public static final XboxController.Axis INCREASE_GAIN_AXIS = XboxController.Axis.kRightTrigger;
-    public static final XboxController.Axis DECREASE_GAIN_AXIS = XboxController.Axis.kLeftTrigger;
 
     // for prototype, length and width from center of the wheels, in m (note chassis is 30" square,
     // the bolt pattern is 29" square, wheels are 2.75" in from the bolt pattern or centered on the
