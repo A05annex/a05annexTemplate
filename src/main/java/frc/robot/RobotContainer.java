@@ -49,9 +49,9 @@ public class RobotContainer extends A05RobotContainer
     {
         super();
         // finish swerve drive initialization for this specific robt.
-        m_driveSubsystem.setDriveGeometry(Constants.DRIVE_LENGTH, Constants.DRIVE_WIDTH,
-                Constants.CalibrationOffset.RF, Constants.CalibrationOffset.RR,
-                Constants.CalibrationOffset.LF, Constants.CalibrationOffset.LR);
+        m_driveSubsystem.setDriveGeometry(m_robotSettings.m_length, m_robotSettings.m_width,
+                m_robotSettings.m_rf, m_robotSettings.m_rr,
+                m_robotSettings.m_lf, m_robotSettings.m_lr);
 
         m_driveCommand = new DriveCommand(m_driveXbox, m_driver);
 

@@ -38,6 +38,8 @@ public class Robot extends A05Robot
         // TODO: may help you determine what is really happening.
         Constants.setPrintDebug(true);
 
+        // Load the robot settings list
+        Collections.addAll(A05Constants.ROBOT_SETTINGS_LIST,Constants.ROBOT_SETTINGS);
         // Load the autonomous path list
         Collections.addAll(A05Constants.AUTONOMOUS_PATH_LIST,Constants.AUTONOMOUS_PATHS);
         // Load the driver list
@@ -85,8 +87,10 @@ public class Robot extends A05Robot
     
     /** This method is called periodically during operator control. */
     @Override
-    public void teleopPeriodic() {}
-    
+    public void teleopPeriodic() {
+        super.teleopPeriodic();
+        A05Constants.printIDs();
+    }
     
     @Override
     public void testInit()

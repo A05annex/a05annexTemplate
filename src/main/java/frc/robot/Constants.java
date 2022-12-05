@@ -42,6 +42,8 @@ public final class Constants extends A05Constants
     //TODO: Comment in if you want 2nd controller, you also need to uncomment something in RobotContainer
     //public static final int ALT_XBOX_PORT = 1; // 2nd Controller for more controls
 
+    // kP for keeping drive at the same orientation
+    public static double DRIVE_ORIENTATION_kP = 1.2;
 
     // for prototype, length and width from center of the wheels, in m (note chassis is 30" square,
     // the bolt pattern is 29" square, wheels are 2.75" in from the bolt pattern or centered on the
@@ -49,23 +51,14 @@ public final class Constants extends A05Constants
     // For competition, length and width from center of the wheels, in m (note chassis is 28" square,
     // the bolt pattern is 27" square, wheels are 2.75" in from the bolt pattern or centered on the
     // corners of a 21.5"(0.5461m) square.
-
+    //TODO: set calibration constants here for your relevant robot. rf = right front, lr = left rear, etc
     //TODO: Verify dimensions of your robot
-    public static final double DRIVE_LENGTH = 0.5969;
-    public static final double DRIVE_WIDTH = 0.5969;
-
-    // kP for keeping drive at the same orientation
-    public static double DRIVE_ORIENTATION_kP = 1.2;
-
-    //TODO: Calibrate and comment date of calibration
-    public static final class CalibrationOffset {
-        public static final double
-                // RF = Right Front, LR = Left Rear, etc
-                RF = 0.785,
-                RR = 0.357,
-                LR = 2.519,
-                LF = 0.563;
-    }
+    public static final A05Constants.RobotSettings[] ROBOT_SETTINGS = {
+            new A05Constants.RobotSettings(0, "Competition", 0.5969, 0.5969, 2.764, 3.559,
+                    4.312, 4.386),
+            new A05Constants.RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
+                    0.969, 5.039)
+    };
 
     public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
             new A05Constants.AutonomousPath("Sample Path", 0, "samplePath.json")
