@@ -36,7 +36,7 @@ public class DriveCommand extends A05DriveCommand {
         //super.execute();
 
         conditionStick();
-        m_driveSubsystem.swerveDriveFieldRelative(m_conditionedDirection, m_conditionedSpeed, m_conditionedRotate);
+        m_driveSubsystem.swerveDrive(m_conditionedDirection, m_conditionedSpeed, m_conditionedRotate);
 
         SmartDashboard.putNumber("Drive Forward", m_conditionedSpeed*(new AngleD(m_conditionedDirection).subtract(m_navx.getHeading()).cos()));
         SmartDashboard.putNumber("Drive Strafe: ", m_conditionedSpeed*(new AngleD(m_conditionedDirection).subtract(m_navx.getHeading()).sin()));
