@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -27,6 +28,24 @@ public final class Constants extends A05Constants
                 MOTOR1 = port number,
                 MOTOR2 = port number;
          */
+    }
+
+    public static class DriverSettingsTuned extends DriverSettings {
+
+        public DriverSettingsTuned(@NotNull String driverName, int id) {
+            super(driverName, id);
+        }
+
+        public void incrementDriveSpeedGain() {
+            m_driveSpeedGain = SmartDashboard.getNumber(DRIVE_SPEED_GAIN, m_driveSpeedGain);
+            m_driveSpeedMaxInc = SmartDashboard.getNumber(DRIVE_SPEED_MAX_INC, m_driveSpeedMaxInc);
+            m_driveSpeedSensitivity = SmartDashboard.getNumber(DRIVE_SPEED_SENSITIVITY, m_driveSpeedSensitivity);
+            m_rotateGain = SmartDashboard.getNumber(ROTATE_GAIN, m_rotateGain);
+            m_rotateMaxInc = SmartDashboard.getNumber(ROTATE_MAX_INC, m_rotateMaxInc);
+            m_rotateSensitivity = SmartDashboard.getNumber(ROTATE_SENSITIVITY, m_rotateSensitivity);
+            m_boostGain = SmartDashboard.getNumber(BOOST_GAIN, m_boostGain);
+            m_slowGain = SmartDashboard.getNumber(SLOW_GAIN, m_slowGain);
+        }
     }
 
 
@@ -79,7 +98,7 @@ public final class Constants extends A05Constants
     };
 
     public static final A05Constants.DriverSettings[] DRIVER_SETTINGS = {
-            new A05Constants.DriverSettings("programmer", 0)
+            new DriverSettingsTuned("programmer", 0)
     };
 
     // Connect values to SmartDashboard, if you change the value in smart dashboard it changes the const
