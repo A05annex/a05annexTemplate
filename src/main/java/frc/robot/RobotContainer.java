@@ -7,12 +7,18 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.DriveCommand;
+import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.A05RobotContainer;
 import org.a05annex.frc.commands.A05DriveCommand;
+import org.a05annex.frc.commands.AutonomousPathCommand;
+
+import java.io.FileNotFoundException;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -48,6 +54,21 @@ public class RobotContainer extends A05RobotContainer
     public RobotContainer()
     {
         super();
+
+        // reload the autonomous path so you can control for mirrored
+        int autoId = A05Constants.readAutoID();
+        A05Constants.AutonomousPath autonomousPath = null;
+        try {
+            autonomousPath = A05Constants.AUTONOMOUS_PATH_LIST.get(autoId);
+            autonomousPath.load();
+            this.m_autoCommand = new AutonomousPathCommand(autonomousPath, autoId == 1, this.m_driveSubsystem, new Subsystem[0]);
+            SmartDashboard.putString("Autonomous", autonomousPath.getName());
+        } catch (IndexOutOfBoundsException var6) {
+            SmartDashboard.putString("Autonomous", String.format("Path ID %d does not exist", autoId));
+        } catch (FileNotFoundException var7) {
+            SmartDashboard.putString("Autonomous", String.format("Could not load path: '%s'", autonomousPath.getName()));
+        }
+
         // finish swerve drive initialization for this specific robt.
         m_driveSubsystem.setDriveGeometry(m_robotSettings.m_length, m_robotSettings.m_width,
                 m_robotSettings.m_rf, m_robotSettings.m_rr,
@@ -83,6 +104,6 @@ public class RobotContainer extends A05RobotContainer
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
 
-        m_xboxBack.whenPressed(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
+        m_xboxBack.onTrue(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
     }
 }
