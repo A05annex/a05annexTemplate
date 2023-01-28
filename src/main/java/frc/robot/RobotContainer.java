@@ -82,6 +82,6 @@ public class RobotContainer extends A05RobotContainer
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
 
-        m_xboxBack.whenPressed(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
+        m_xboxBack.onTrue(new InstantCommand(m_navx::initializeHeadingAndNav)); // Reset the NavX field relativity
     }
 }
