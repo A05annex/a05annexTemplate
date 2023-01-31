@@ -55,18 +55,10 @@ public class RobotContainer extends A05RobotContainer
     {
         super();
 
-        // reload the autonomous path so you can control for mirrored
-        int autoId = A05Constants.readAutoID();
-        A05Constants.AutonomousPath autonomousPath = null;
-        try {
-            autonomousPath = A05Constants.AUTONOMOUS_PATH_LIST.get(autoId);
-            autonomousPath.load();
-            this.m_autoCommand = new AutonomousPathCommand(autonomousPath, autoId == 1, this.m_driveSubsystem, new Subsystem[0]);
-            SmartDashboard.putString("Autonomous", autonomousPath.getName());
-        } catch (IndexOutOfBoundsException var6) {
-            SmartDashboard.putString("Autonomous", String.format("Path ID %d does not exist", autoId));
-        } catch (FileNotFoundException var7) {
-            SmartDashboard.putString("Autonomous", String.format("Could not load path: '%s'", autonomousPath.getName()));
+        //TODO: add additional autonomous configuration
+        if (null != m_autoCommand) {
+            int autoId = A05Constants.readAutoID();
+            m_autoCommand.setMirror(autoId == 1);
         }
 
         // finish swerve drive initialization for this specific robt.
@@ -84,9 +76,6 @@ public class RobotContainer extends A05RobotContainer
 //        A05DriveCommand.ROTATE_SENSITIVITY = 1.5D;
 
         m_driveSubsystem.setDefaultCommand(m_driveCommand);
-
-
-        //TODO: add auto
 
         // Configure the button bindings
         configureButtonBindings();
