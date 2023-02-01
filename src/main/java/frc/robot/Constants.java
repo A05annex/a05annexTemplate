@@ -66,8 +66,8 @@ public final class Constants extends A05Constants
      * These settings are loaded into {@link #ROBOT_SETTINGS_LIST} during {@link Robot#robotInit()}
      */
     public static final A05Constants.RobotSettings[] ROBOT_SETTINGS = {
-            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.723, 4.047,
-                    4.303, 4.317),
+            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
+                    2.703, 2.443),
             new A05Constants.RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
                     0.969, 5.039)
     };
