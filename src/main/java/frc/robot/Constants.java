@@ -5,8 +5,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.XboxController;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.jetbrains.annotations.NotNull;
@@ -87,10 +85,10 @@ public final class Constants extends A05Constants
      * These settings are loaded into {@link #ROBOT_SETTINGS_LIST} during {@link Robot#robotInit()}
      */
     public static final A05Constants.RobotSettings[] ROBOT_SETTINGS = {
-            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.764, 3.559,
-                    4.312, 4.386),
+            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
+                    2.703, 2.443, 1.0954),
             new A05Constants.RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
-                    0.969, 5.039)
+                    0.969, 5.039, 1.0403)
     };
 
     public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
