@@ -89,7 +89,6 @@ public class Robot extends A05Robot
     @Override
     public void teleopPeriodic() {
         super.teleopPeriodic();
-        A05Constants.printIDs();
     }
     
     @Override

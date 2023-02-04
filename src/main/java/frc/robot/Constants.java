@@ -34,7 +34,7 @@ public final class Constants extends A05Constants
             super(driverName, id);
         }
 
-        public void incrementDriveSpeedGain() {
+        public void updateDriveParams() {
             m_driveSpeedGain = SmartDashboard.getNumber(DRIVE_SPEED_GAIN, m_driveSpeedGain);
             m_driveSpeedMaxInc = SmartDashboard.getNumber(DRIVE_SPEED_MAX_INC, m_driveSpeedMaxInc);
             m_driveSpeedSensitivity = SmartDashboard.getNumber(DRIVE_SPEED_SENSITIVITY, m_driveSpeedSensitivity);
