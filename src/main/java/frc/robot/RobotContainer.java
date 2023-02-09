@@ -58,7 +58,7 @@ public class RobotContainer extends A05RobotContainer
         //TODO: add additional autonomous configuration
         if (null != m_autoCommand) {
             int autoId = A05Constants.readAutoID();
-            m_autoCommand.setMirror(autoId == 1);
+            m_autoCommand.setMirror((autoId % 2) == 1);
         }
 
         // finish swerve drive initialization for this specific robt.

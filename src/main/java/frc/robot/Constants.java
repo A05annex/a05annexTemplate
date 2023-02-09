@@ -74,7 +74,9 @@ public final class Constants extends A05Constants
 
     public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
             new A05Constants.AutonomousPath("Mirror Test", 0, "MirrorTest.json"),
-            new A05Constants.AutonomousPath("Mirror Test - Mirrored", 1, "MirrorTest.json")
+            new A05Constants.AutonomousPath("Mirror Test - Mirrored", 1, "MirrorTest.json"),
+            new A05Constants.AutonomousPath("Mirror Test 2", 2, "MirrorTest2.json"),
+            new A05Constants.AutonomousPath("Mirror Test 2 - Mirrored", 3, "MirrorTest2.json")
     };
 
     public static final A05Constants.DriverSettings[] DRIVER_SETTINGS = {
