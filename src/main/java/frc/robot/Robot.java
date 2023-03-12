@@ -5,13 +5,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.A05Robot;
-import org.a05annex.frc.NavX;
 import org.a05annex.frc.subsystems.DriveSubsystem;
 
 import java.util.Collections;
@@ -64,6 +61,11 @@ public class Robot extends A05Robot
     public void disabledPeriodic() {
         //SmartDashboard.putNumber("Heading", NavX.getInstance().getHeadingInfo().expectedHeading.getDegrees());
         DriveSubsystem.getInstance().printAllAngles();
+
+        SmartDashboard.putNumber("lf drive", DriveSubsystem.getInstance().getLFModule().getDriveEncoderPosition());
+        SmartDashboard.putNumber("lr drive", DriveSubsystem.getInstance().getLRModule().getDriveEncoderPosition());
+        SmartDashboard.putNumber("rf drive", DriveSubsystem.getInstance().getRFModule().getDriveEncoderPosition());
+        SmartDashboard.putNumber("rr drive", DriveSubsystem.getInstance().getRRModule().getDriveEncoderPosition());
     }
     
     
