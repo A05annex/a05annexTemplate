@@ -1,11 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.commands.A05DriveCommand;
-import org.a05annex.util.AngleD;
-import org.a05annex.util.AngleUnit;
+import org.a05annex.frc.subsystems.ISwerveDrive;
 
 /**
  * Drive command is here because you will likely need to override the serve (targeting, competition specific reason)
@@ -17,8 +15,8 @@ public class DriveCommand extends A05DriveCommand {
      * Contains driver constants for sensitivity, gain, and deadband.
      * @param xbox (XboxController) The drive xbox controller.
      */
-    public DriveCommand(XboxController xbox, A05Constants.DriverSettings driver) {
-        super(xbox, driver);
+    public DriveCommand(ISwerveDrive swerveDrive, XboxController xbox, A05Constants.DriverSettings driver) {
+        super(swerveDrive, xbox, driver);
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
     }
@@ -36,6 +34,6 @@ public class DriveCommand extends A05DriveCommand {
         //super.execute();
 
         conditionStick();
-        m_driveSubsystem.swerveDrive(m_conditionedDirection, m_conditionedSpeed, m_conditionedRotate);
+        iSwerveDrive.swerveDrive(conditionedDirection, conditionedSpeed, conditionedRotate);
     }
 }
