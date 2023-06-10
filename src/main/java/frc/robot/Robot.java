@@ -5,13 +5,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.A05Robot;
-import org.a05annex.frc.NavX;
 import org.a05annex.frc.subsystems.DriveSubsystem;
 
 import java.util.Collections;
@@ -40,6 +36,9 @@ public class Robot extends A05Robot
         // TODO: i.e. uncommenting the following line, will add a lot of debug logging to the console output, and
         // TODO: may help you determine what is really happening.
         Constants.setPrintDebug(true);
+
+        // update dictionary with all needed values
+        Constants.setAprilTagPositionParametersDictionary();
 
         // Load the robot settings list
         Collections.addAll(A05Constants.ROBOT_SETTINGS_LIST,Constants.ROBOT_SETTINGS);

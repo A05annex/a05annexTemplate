@@ -7,6 +7,8 @@ package frc.robot;
 
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.a05annex.util.AngleConstantD;
+import org.a05annex.util.AngleD;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,44 +22,17 @@ import org.jetbrains.annotations.NotNull;
 public final class Constants extends A05Constants
 {
     public static final class CAN_Devices {
-        /*
         public static final int
-                // Non-Drive Motors
-                MOTOR1 = port number,
-                MOTOR2 = port number;
-         */
+            // Non-Drive Motors
+            SAMPLE_MOTOR = 9,
+            OTHER_MOTOR = 10;
     }
-
-    public static class DriverSettingsTuned extends DriverSettings {
-
-        public DriverSettingsTuned(@NotNull String driverName, int id) {
-            super(driverName, id);
-        }
-
-        public void updateDriveParams() {
-            m_driveSpeedGain = SmartDashboard.getNumber(DRIVE_SPEED_GAIN, m_driveSpeedGain);
-            m_driveSpeedMaxInc = SmartDashboard.getNumber(DRIVE_SPEED_MAX_INC, m_driveSpeedMaxInc);
-            m_driveSpeedSensitivity = SmartDashboard.getNumber(DRIVE_SPEED_SENSITIVITY, m_driveSpeedSensitivity);
-            m_rotateGain = SmartDashboard.getNumber(ROTATE_GAIN, m_rotateGain);
-            m_rotateMaxInc = SmartDashboard.getNumber(ROTATE_MAX_INC, m_rotateMaxInc);
-            m_rotateSensitivity = SmartDashboard.getNumber(ROTATE_SENSITIVITY, m_rotateSensitivity);
-            m_boostGain = SmartDashboard.getNumber(BOOST_GAIN, m_boostGain);
-            m_slowGain = SmartDashboard.getNumber(SLOW_GAIN, m_slowGain);
-        }
-    }
-
 
     //TODO: Set which cameras you have
     public static final boolean HAS_USB_CAMERA = false;
     public static final boolean HAS_LIMELIGHT = false;
 
 
-    /*
-        DRIVE_XBOX_PORT = 0 (Set in A05Constants)
-        Port 0 is whichever controller was plugged in first, not a specific port.
-    */
-    //TODO: Comment in if you want 2nd controller, you also need to uncomment something in RobotContainer
-    //public static final int ALT_XBOX_PORT = 1; // 2nd Controller for more controls
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
@@ -86,9 +61,9 @@ public final class Constants extends A05Constants
      */
     public static final A05Constants.RobotSettings[] ROBOT_SETTINGS = {
             new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
-                    2.703, 2.443, 0.9650),
+                    2.723, 2.448, 1.026,0.9650),
             new A05Constants.RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
-                    0.969, 5.039, 0.9164)
+                    0.969, 5.039, 1.026, 0.9164)
     };
 
     public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
@@ -96,8 +71,14 @@ public final class Constants extends A05Constants
     };
 
     public static final A05Constants.DriverSettings[] DRIVER_SETTINGS = {
-            new DriverSettingsTuned("programmer", 0)
+            new DriverSettings("programmer", 0)
     };
+
+    public static void setAprilTagPositionParametersDictionary() {
+        aprilTagPositionParametersDictionary.put("example", new AprilTagPositionParameters(1.0,
+                1.0, 1.0, 1.0, new int[] {1, 2, 3}, new AngleD(AngleConstantD.ZERO)));
+    }
+
 
     // Connect values to SmartDashboard, if you change the value in smart dashboard it changes the const
     // (speed adjusting etc.) By having two methods, you can optionally add the bounds
