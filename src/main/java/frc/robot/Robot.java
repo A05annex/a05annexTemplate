@@ -29,6 +29,7 @@ public class Robot extends A05Robot
     @Override
     public void robotInit()
     {
+        super.robotInit();
         // Set the drive constants that are specific to this swerve geometry.
         // Some drive geometry is passed in RobotContainer's constructor
         Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);

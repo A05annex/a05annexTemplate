@@ -7,9 +7,11 @@ package frc.robot;
 
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.a05annex.frc.subsystems.PhotonCameraWrapper;
 import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
 import org.jetbrains.annotations.NotNull;
+import org.photonvision.PhotonCamera;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -33,6 +35,8 @@ public final class Constants extends A05Constants
     public static final boolean HAS_LIMELIGHT = false;
 
 
+    //TODO: declare camera name
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera(""));
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
