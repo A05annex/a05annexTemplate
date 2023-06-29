@@ -5,10 +5,11 @@ import com.revrobotics.CANSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.a05annex.frc.subsystems.SparkNeo;
+import org.a05annex.frc.subsystems.SparkNeo550;
 
 public class SampleMotorSubsystem extends SubsystemBase {
 
-    private final SparkNeo motor = SparkNeo.factory(Constants.CAN_Devices.SAMPLE_MOTOR);
+    private final SparkNeo550 motor = SparkNeo550.factory(Constants.CAN_Devices.SAMPLE_MOTOR);
 
     // Declare PID constants for smart motion control
     private final double smKp = 0.00005, smKi = 0.000, smKiZone = 0.0, smKff = 0.000156, smMaxRPM = 3000.0,
@@ -51,6 +52,26 @@ public class SampleMotorSubsystem extends SubsystemBase {
 
     public void setVelocity(double rpm) {
         motor.setTargetRPM(rpm);
+    }
+
+    public void setForward() {
+        motor.setTargetPosition(1000.0);
+    }
+
+    public void setBackward() {
+        motor.sparkMax.set(-0.5);
+    }
+
+    public void resetEncoder() {
+        motor.setEncoderPosition(0.0);
+    }
+
+    public void stop() {
+        motor.stopMotor();
+    }
+
+    public double getEncoder() {
+        return motor.getEncoderPosition();
     }
 }
 

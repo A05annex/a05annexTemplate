@@ -26,7 +26,7 @@ public final class Constants extends A05Constants
     public static final class CAN_Devices {
         public static final int
             // Non-Drive Motors
-            SAMPLE_MOTOR = 9,
+            SAMPLE_MOTOR = 14,
             OTHER_MOTOR = 10;
     }
 
@@ -36,7 +36,7 @@ public final class Constants extends A05Constants
 
 
     //TODO: declare camera name
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera(""));
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"));
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
