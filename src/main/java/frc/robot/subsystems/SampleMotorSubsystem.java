@@ -54,24 +54,12 @@ public class SampleMotorSubsystem extends SubsystemBase {
         motor.setTargetRPM(rpm);
     }
 
-    public void setForward() {
-        motor.setTargetPosition(1000.0);
-    }
-
-    public void setBackward() {
-        motor.sparkMax.set(-0.5);
-    }
-
     public void resetEncoder() {
         motor.setEncoderPosition(0.0);
     }
 
     public void stop() {
         motor.stopMotor();
-    }
-
-    public double getEncoder() {
-        return motor.getEncoderPosition();
     }
 }
 
