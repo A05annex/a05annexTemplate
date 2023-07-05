@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.a05annex.frc.subsystems.SparkNeo;
@@ -22,7 +24,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
     private final double rpmKp = 0.5, rpmKi = 0.0, rpmKiZone = 0.0, rpmKff = 0.0;
 
     // Declare min and max soft limits and where the motor thinks it starts
-    private final Double minPosition = null, maxPosition = 1000.0, startPosition = 500.0;
+    private final Double minPosition = null, maxPosition = 100.0, startPosition = 50.0;
 
     private final static SampleMotorSubsystem INSTANCE = new SampleMotorSubsystem();
     public static SampleMotorSubsystem getInstance() {
@@ -55,7 +57,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
     }
 
     public void setForward() {
-        motor.setTargetPosition(1000.0);
+        motor.sparkMax.set(0.5);
     }
 
     public void setBackward() {
