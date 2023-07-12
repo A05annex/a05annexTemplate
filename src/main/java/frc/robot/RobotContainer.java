@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.CacheLoggingCommand;
 import frc.robot.commands.DriveCommand;
 import org.a05annex.frc.A05RobotContainer;
+import org.a05annex.frc.subsystems.SpeedCachedSwerve;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,6 +27,7 @@ public class RobotContainer extends A05RobotContainer
     // The robot's subsystems and commands are defined here...
     // NavX, DriveSubsystem, DriveXbox have already been made in A05RobotContainer
     //TODO: Add any additional subsystems and commands here
+    SpeedCachedSwerve speedCachedSwerve = SpeedCachedSwerve.getInstance();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -33,13 +35,15 @@ public class RobotContainer extends A05RobotContainer
     {
         super();
         // finish swerve drive initialization for this specific robt.
-        driveSubsystem.setDriveGeometry(robotSettings.length, robotSettings.width,
+        driveCommand = new DriveCommand(driveSubsystem, driveXbox, driver);
+
+        speedCachedSwerve.setDriveSubsystem(driveSubsystem);
+        speedCachedSwerve.setCacheLength(1000);
+
+        speedCachedSwerve.setDriveGeometry(robotSettings.length, robotSettings.width,
                 robotSettings.rf, robotSettings.rr,
                 robotSettings.lf, robotSettings.lr,
                 robotSettings.maxSpeedCalibration);
-
-        driveCommand = new DriveCommand(driveSubsystem, driveXbox, driver);
-
 
         driveSubsystem.setDefaultCommand(driveCommand);
 
