@@ -5,7 +5,7 @@ plugins {
     id "edu.wpi.first.GradleRIO" version "2023.4.3"
 }
 
-def javaVersion = JavaVersion.VERSION_15
+def javaVersion = JavaVersion.VERSION_11
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 

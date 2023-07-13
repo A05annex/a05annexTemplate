@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.util.datalog.*;
 import edu.wpi.first.wpilibj.DataLogManager;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 
@@ -27,12 +28,18 @@ public class CacheLoggingCommand extends A05DriveCommand {
 
     private boolean hasValidFrame;
     private final BooleanLogEntry hasValidFrameLog = new BooleanLogEntry(log, "hasValidFrame");
+    private final DoubleLogEntry actualPositionTimeLog = new DoubleLogEntry(log, "actualPositionTimeLog");
 
     private final DoubleLogEntry actualXPositionLog = new DoubleLogEntry(log, "actualXPosition");
     private final DoubleLogEntry actualYPositionLog = new DoubleLogEntry(log, "actualYPosition");
 
     private final DoubleLogEntry cacheXPositionLog = new DoubleLogEntry(log, "cacheXPosition");
     private final DoubleLogEntry cacheYPositionLog = new DoubleLogEntry(log, "cacheYPosition");
+
+    private final DoubleLogEntry swerveTime = new DoubleLogEntry(log, "swerveTime");
+    private final DoubleLogEntry direction = new DoubleLogEntry(log, "direction");
+    private final DoubleLogEntry speed = new DoubleLogEntry(log, "speed");
+    private final DoubleLogEntry rotate = new DoubleLogEntry(log, "rotate");
 
     public CacheLoggingCommand(XboxController driveXbox, A05Constants.DriverSettings driver) {
         super(SpeedCachedSwerve.getInstance(), driveXbox, driver);
@@ -65,6 +72,10 @@ public class CacheLoggingCommand extends A05DriveCommand {
 
         speedCachedSwerve.swerveDrive(conditionedDirection, conditionedSpeed, conditionedRotate);
 
+        direction.append(conditionedDirection.getRadians());
+        speed.append(conditionedSpeed);
+        rotate.append(conditionedRotate);
+        swerveTime.append(Timer.getFPGATimestamp());
 
         camera.updateLatestFrameAndTarget();
 
@@ -87,6 +98,7 @@ public class CacheLoggingCommand extends A05DriveCommand {
             baseTargetTime = camera.getLatestTargetTime();
         }
 
+        actualPositionTimeLog.append(camera.getLatestTargetTime());
         actualXPositionLog.append(camera.getXFromLastTarget());
         actualYPositionLog.append(camera.getYFromLastTarget());
         cacheXPositionLog.append(getXFromBaseTarget() - speedCachedSwerve.getRobotRelativePositionSince(baseTargetTime).forward);
