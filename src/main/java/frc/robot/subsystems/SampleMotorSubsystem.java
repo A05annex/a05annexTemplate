@@ -61,5 +61,9 @@ public class SampleMotorSubsystem extends SubsystemBase {
     public void stop() {
         motor.stopMotor();
     }
+
+    public double getPosition() {
+        return motor.getEncoderPosition();
+    }
 }
 

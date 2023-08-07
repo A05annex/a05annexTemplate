@@ -101,7 +101,7 @@ public class Robot extends A05Robot
     public void teleopPeriodic() {
         super.teleopPeriodic();
 
-        SmartDashboard.putNumber("sampleMotorPosition", SampleMotorSubsystem.getInstance().getEncoder());
+        SmartDashboard.putNumber("sampleMotorPosition", SampleMotorSubsystem.getInstance().getPosition());
     }
     
     @Override
