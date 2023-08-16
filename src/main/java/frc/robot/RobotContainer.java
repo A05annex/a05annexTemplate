@@ -38,7 +38,8 @@ public class RobotContainer extends A05RobotContainer
         driveCommand = new DriveCommand(driveSubsystem, driveXbox, driver);
 
         speedCachedSwerve.setDriveSubsystem(driveSubsystem);
-        speedCachedSwerve.setCacheLength(1000);
+        speedCachedSwerve.setCacheLength(10000);
+        speedCachedSwerve.setLogging(true);
 
         speedCachedSwerve.setDriveGeometry(robotSettings.length, robotSettings.width,
                 robotSettings.rf, robotSettings.rr,

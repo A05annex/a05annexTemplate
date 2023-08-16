@@ -22,24 +22,30 @@ public class CacheLoggingCommand extends A05DriveCommand {
     private PhotonTrackedTarget baseTarget = null;
     private double baseTargetTime;
 
-    private final DataLog log = DataLogManager.getLog();
+//    private final DataLog log = DataLogManager.getLog();
 
-    private final BooleanLogEntry isRunningLoggingCommand = new BooleanLogEntry(log, "isRunningLoggingCommand");
+//    private final BooleanLogEntry isRunningLoggingCommand = new BooleanLogEntry(log, "isRunningLoggingCommand");
 
     private boolean hasValidFrame;
-    private final BooleanLogEntry hasValidFrameLog = new BooleanLogEntry(log, "hasValidFrame");
-    private final DoubleLogEntry actualPositionTimeLog = new DoubleLogEntry(log, "actualPositionTimeLog");
 
-    private final DoubleLogEntry actualXPositionLog = new DoubleLogEntry(log, "actualXPosition");
-    private final DoubleLogEntry actualYPositionLog = new DoubleLogEntry(log, "actualYPosition");
+    private boolean isFinished = false;
 
-    private final DoubleLogEntry cacheXPositionLog = new DoubleLogEntry(log, "cacheXPosition");
-    private final DoubleLogEntry cacheYPositionLog = new DoubleLogEntry(log, "cacheYPosition");
+    public static final String APRIL_TAG_LOG_NAME = "aprilTag";
+    private StringLogEntry aprilTagLog = new StringLogEntry(DataLogManager.getLog(),APRIL_TAG_LOG_NAME);
 
-    private final DoubleLogEntry swerveTime = new DoubleLogEntry(log, "swerveTime");
-    private final DoubleLogEntry direction = new DoubleLogEntry(log, "direction");
-    private final DoubleLogEntry speed = new DoubleLogEntry(log, "speed");
-    private final DoubleLogEntry rotate = new DoubleLogEntry(log, "rotate");
+//    private final BooleanLogEntry hasValidFrameLog = new BooleanLogEntry(log, "hasValidFrame");
+//    private final DoubleLogEntry actualPositionTimeLog = new DoubleLogEntry(log, "actualPositionTimeLog");
+//
+//    private final DoubleLogEntry actualXPositionLog = new DoubleLogEntry(log, "actualXPosition");
+//    private final DoubleLogEntry actualYPositionLog = new DoubleLogEntry(log, "actualYPosition");
+//
+//    private final DoubleLogEntry cacheXPositionLog = new DoubleLogEntry(log, "cacheXPosition");
+//    private final DoubleLogEntry cacheYPositionLog = new DoubleLogEntry(log, "cacheYPosition");
+
+//    private final DoubleLogEntry swerveTime = new DoubleLogEntry(log, "swerveTime");
+//    private final DoubleLogEntry direction = new DoubleLogEntry(log, "direction");
+//    private final DoubleLogEntry speed = new DoubleLogEntry(log, "speed");
+//    private final DoubleLogEntry rotate = new DoubleLogEntry(log, "rotate");
 
     public CacheLoggingCommand(XboxController driveXbox, A05Constants.DriverSettings driver) {
         super(SpeedCachedSwerve.getInstance(), driveXbox, driver);
@@ -55,8 +61,8 @@ public class CacheLoggingCommand extends A05DriveCommand {
         }
 
         hasValidFrame = camera.doesLatestFrameAndTargetMatch();
-        hasValidFrameLog.append(hasValidFrame);
-        isRunningLoggingCommand.append(true);
+//        hasValidFrameLog.append(hasValidFrame);
+//        isRunningLoggingCommand.append(true);
     }
 
     @Override
@@ -72,47 +78,47 @@ public class CacheLoggingCommand extends A05DriveCommand {
 
         speedCachedSwerve.swerveDrive(conditionedDirection, conditionedSpeed, conditionedRotate);
 
-        direction.append(conditionedDirection.getRadians());
-        speed.append(conditionedSpeed);
-        rotate.append(conditionedRotate);
-        swerveTime.append(Timer.getFPGATimestamp());
+        // The cache is doing it's own logging so the logged information is what is actually in the cache.
+//        direction.append(conditionedDirection.getRadians());
+//        speed.append(conditionedSpeed);
+//        rotate.append(conditionedRotate);
+//        swerveTime.append(Timer.getFPGATimestamp());
 
         camera.updateLatestFrameAndTarget();
 
         // Log weather or not there was a valid frame
-        // We use an if statement and hasValidFrame to avoid unnecessary/extra logging
-        if(camera.doesLatestFrameAndTargetMatch() != hasValidFrame) {
-            hasValidFrame = camera.doesLatestFrameAndTargetMatch();
-            hasValidFrameLog.append(hasValidFrame);
-        }
+        hasValidFrame = camera.doesLatestFrameAndTargetMatch();
+        if (!hasValidFrame) {
+            // wait until there is a new target before we log again
+            aprilTagLog.append("FALSE" );
+        } else {
+            // Is a base frame set yet?
+            if (baseTarget == null) {
+                // Set the base frame and go from there
+                baseTarget = camera.getLatestTarget();
+                baseTargetTime = camera.getLatestTargetTime();
+            }
+            SpeedCachedSwerve.RobotRelativePosition position =
+                    speedCachedSwerve.getRobotRelativePositionSince(baseTargetTime);
+            if (position.cacheOverrun) {
+                isFinished = true;
+                return;
+            }
 
-        if(!camera.doesLatestFrameAndTargetMatch()) {
-            // wait until there is
-            return;
+            aprilTagLog.append(String.format("TRUE,%.4,%.5f,%.5f,%.5f%.5f",camera.getLatestTargetTime(),
+                    camera.getXFromLastTarget(), camera.getYFromLastTarget(),
+                    getXFromBaseTarget() - position.forward, getYFromBaseTarget() - position.strafe));
         }
-
-        // Is a base frame set yet?
-        if(baseTarget == null) {
-            // Set the base frame and go from there
-            baseTarget = camera.getLatestTarget();
-            baseTargetTime = camera.getLatestTargetTime();
-        }
-
-        actualPositionTimeLog.append(camera.getLatestTargetTime());
-        actualXPositionLog.append(camera.getXFromLastTarget());
-        actualYPositionLog.append(camera.getYFromLastTarget());
-        cacheXPositionLog.append(getXFromBaseTarget() - speedCachedSwerve.getRobotRelativePositionSince(baseTargetTime).forward);
-        cacheYPositionLog.append(getYFromBaseTarget() - speedCachedSwerve.getRobotRelativePositionSince(baseTargetTime).strafe);
     }
 
     @Override
     public boolean isFinished() {
-        return speedCachedSwerve.getRobotRelativePositionSince(baseTargetTime).cacheOverrun;
+        return isFinished;
     }
 
     @Override
     public void end(boolean interrupted) {
-        isRunningLoggingCommand.append(false);
+        aprilTagLog.append("");
     }
 
     private double getXFromBaseTarget() {
