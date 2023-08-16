@@ -105,7 +105,7 @@ public class CacheLoggingCommand extends A05DriveCommand {
                 return;
             }
 
-            aprilTagLog.append(String.format("TRUE,%.4,%.5f,%.5f,%.5f%.5f",camera.getLatestTargetTime(),
+            aprilTagLog.append(String.format("TRUE,%.4f,%.5f,%.5f,%.5f,%.5f",camera.getLatestTargetTime(),
                     camera.getXFromLastTarget(), camera.getYFromLastTarget(),
                     getXFromBaseTarget() - position.forward, getYFromBaseTarget() - position.strafe));
         }
