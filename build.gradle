@@ -1,13 +1,12 @@
-import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
-
 plugins {
     id "java"
-    id "edu.wpi.first.GradleRIO" version "2023.4.3"
+    id "edu.wpi.first.GradleRIO" version "2024.1.1-beta-4"
 }
 
-def javaVersion = JavaVersion.VERSION_15
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
 
@@ -56,10 +55,10 @@ test {
 dependencies {
 
     implementation 'org.a05annex:a05annexUtil:0.9.6'
-    implementation 'org.a05annex:a05annexRobot:0.0.31'
+//    implementation 'org.a05annex:a05annexRobot:0.0.31'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
@@ -80,9 +79,9 @@ dependencies {
 
 
     implementation platform("org.junit:junit-bom:5.8.2")
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "org.junit.jupiter:junit-jupiter-params"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testRuntimeOnly('org.a05annex:a05annexUtil:0.9.6')
 }
 
@@ -103,3 +102,13 @@ jar {
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
 wpi.java.configureTestTasks(test)
+
+// Configure jar and deploy tasks
+deployArtifact.jarTask = jar
+wpi.java.configureExecutableTasks(jar)
+wpi.java.configureTestTasks(test)
+
+// Configure string concat to always inline compile
+tasks.withType(JavaCompile) {
+    options.compilerArgs.add '-XDstringConcat=inline'
+}
