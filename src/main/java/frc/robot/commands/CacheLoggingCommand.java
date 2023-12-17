@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.util.datalog.*;
 import edu.wpi.first.wpilibj.DataLogManager;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants;
 
@@ -22,30 +21,12 @@ public class CacheLoggingCommand extends A05DriveCommand {
     private PhotonTrackedTarget baseTarget = null;
     private double baseTargetTime;
 
-//    private final DataLog log = DataLogManager.getLog();
-
-//    private final BooleanLogEntry isRunningLoggingCommand = new BooleanLogEntry(log, "isRunningLoggingCommand");
-
     private boolean hasValidFrame;
 
     private boolean isFinished = false;
 
     public static final String APRIL_TAG_LOG_NAME = "aprilTag";
-    private StringLogEntry aprilTagLog = new StringLogEntry(DataLogManager.getLog(),APRIL_TAG_LOG_NAME);
-
-//    private final BooleanLogEntry hasValidFrameLog = new BooleanLogEntry(log, "hasValidFrame");
-//    private final DoubleLogEntry actualPositionTimeLog = new DoubleLogEntry(log, "actualPositionTimeLog");
-//
-//    private final DoubleLogEntry actualXPositionLog = new DoubleLogEntry(log, "actualXPosition");
-//    private final DoubleLogEntry actualYPositionLog = new DoubleLogEntry(log, "actualYPosition");
-//
-//    private final DoubleLogEntry cacheXPositionLog = new DoubleLogEntry(log, "cacheXPosition");
-//    private final DoubleLogEntry cacheYPositionLog = new DoubleLogEntry(log, "cacheYPosition");
-
-//    private final DoubleLogEntry swerveTime = new DoubleLogEntry(log, "swerveTime");
-//    private final DoubleLogEntry direction = new DoubleLogEntry(log, "direction");
-//    private final DoubleLogEntry speed = new DoubleLogEntry(log, "speed");
-//    private final DoubleLogEntry rotate = new DoubleLogEntry(log, "rotate");
+    private final StringLogEntry aprilTagLog = new StringLogEntry(DataLogManager.getLog(),APRIL_TAG_LOG_NAME);
 
     public CacheLoggingCommand(XboxController driveXbox, A05Constants.DriverSettings driver) {
         super(SpeedCachedSwerve.getInstance(), driveXbox, driver);
@@ -61,8 +42,6 @@ public class CacheLoggingCommand extends A05DriveCommand {
         }
 
         hasValidFrame = camera.doesLatestFrameAndTargetMatch();
-//        hasValidFrameLog.append(hasValidFrame);
-//        isRunningLoggingCommand.append(true);
     }
 
     @Override
@@ -77,12 +56,6 @@ public class CacheLoggingCommand extends A05DriveCommand {
         lastConditionedRotate = conditionedRotate;
 
         speedCachedSwerve.swerveDrive(conditionedDirection, conditionedSpeed, conditionedRotate);
-
-        // The cache is doing it's own logging so the logged information is what is actually in the cache.
-//        direction.append(conditionedDirection.getRadians());
-//        speed.append(conditionedSpeed);
-//        rotate.append(conditionedRotate);
-//        swerveTime.append(Timer.getFPGATimestamp());
 
         camera.updateLatestFrameAndTarget();
 
