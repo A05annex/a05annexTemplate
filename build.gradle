@@ -56,10 +56,10 @@ test {
 dependencies {
 
     implementation 'org.a05annex:a05annexUtil:0.9.6'
-    //implementation 'org.a05annex:a05annexRobot:0.0.1'
+    implementation 'org.a05annex:a05annexRobot:0.0.31'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
