@@ -8,10 +8,9 @@ import org.a05annex.frc.subsystems.PhotonCameraWrapper;
 
 public class AprilTagPositionCommand extends A05AprilTagPositionCommand {
 
-    public AprilTagPositionCommand(XboxController xbox, A05Constants.DriverSettings driver, PhotonCameraWrapper camera,
-                                   double xPosition, double yPosition, String positionParametersKey) {
+    public AprilTagPositionCommand(PhotonCameraWrapper camera, double xPosition, double yPosition, String positionParametersKey) {
         // NOTE: the super adds the drive subsystem requirement
-        super(xbox, driver, camera, xPosition, yPosition, positionParametersKey);
+        super(camera, xPosition, yPosition, positionParametersKey);
     }
 
     @Override

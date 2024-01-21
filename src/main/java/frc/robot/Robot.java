@@ -44,7 +44,7 @@ public class Robot extends A05Robot
         Constants.setPrintDebug(true);
 
         // update dictionary with all needed values
-        Constants.setAprilTagPositionParametersDictionary();
+        Constants.setAprilTagSetDictionary();
 
         // Load the robot settings list
         Collections.addAll(A05Constants.ROBOT_SETTINGS_LIST,Constants.ROBOT_SETTINGS);
