@@ -6,7 +6,7 @@ the documentation of this project, not the robot code you create using this temp
 
 # A05Annex Project Template for 2024 Crescendo
 
-* **version:** 0.0.32
+* **version:** 2024.0.1 (runs with WPIlib 2024.2.1 and associated vendor deps; and a05annexRobot 2024.0.1)
 * **status:** first used for FRC **2023 Charged Up**, updated for **2024 Crescendo**
 * **comments:** This is the starting point for a swerve drive robot built on the
   [a05annexRobot](https://github.com/A05annex/a05annexRobot) Swerve Drive with NavX and PhotonVision
