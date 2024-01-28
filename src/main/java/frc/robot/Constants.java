@@ -8,9 +8,8 @@ package frc.robot;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.subsystems.PhotonCameraWrapper;
-import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
-import org.jetbrains.annotations.NotNull;
+import org.a05annex.util.AngleUnit;
 import org.photonvision.PhotonCamera;
 
 /**
@@ -26,8 +25,7 @@ public final class Constants extends A05Constants
     public static final class CAN_Devices {
         public static final int
             // Non-Drive Motors
-            SAMPLE_MOTOR = 14,
-            OTHER_MOTOR = 10;
+            SAMPLE_MOTOR = 14;
     }
 
     //TODO: Set which cameras you have
@@ -35,8 +33,7 @@ public final class Constants extends A05Constants
     public static final boolean HAS_LIMELIGHT = false;
 
 
-    //TODO: declare camera name
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"));
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 0.127, new AngleD(AngleUnit.DEGREES, 45));
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
@@ -78,9 +75,9 @@ public final class Constants extends A05Constants
             new DriverSettings("programmer", 0)
     };
 
-    public static void setAprilTagPositionParametersDictionary() {
-        aprilTagPositionParametersDictionary.put("example", new AprilTagPositionParameters(1.0,
-                1.0, 1.0, 1.0, new int[] {1, 2, 3}, new AngleD(AngleConstantD.ZERO)));
+    public static void setAprilTagSetDictionary() {
+        aprilTagSetDictionary.put("example", new AprilTagSet(new int[] {1, 2}, new AngleD(AngleUnit.DEGREES, 0), 1.0));
+        aprilTagSetDictionary.put("example 2", new AprilTagSet(new int[] {3, 4}, 1.0));
     }
 
 
