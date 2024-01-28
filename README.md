@@ -16,7 +16,7 @@ This is a project template for a swerve drive robot built on [a05annexRobot](htt
 library, which provides:
 * The Swerve Drive subsystem with a driver-tunable drive command;
 * A wrapper for the NavX which is integrated with the Drive subsystem for things like maintaining
-  robot heading while translating, simultaneous rotation to face downfield/upfield while driving,
+  robot heading while translating, simultaneous rotation to face down-field/up-field while driving,
   and calibration for rotational drift of the NavX;
 * Autonomous path selection and use of paths generated using the
   [SwervePathPlanner](https://github.com/A05annex/SwervePathPlanning);
