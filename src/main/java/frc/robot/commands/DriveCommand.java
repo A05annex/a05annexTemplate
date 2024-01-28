@@ -16,7 +16,7 @@ public class DriveCommand extends A05DriveCommand {
      * @param xbox (XboxController) The drive xbox controller.
      */
     public DriveCommand(ISwerveDrive swerveDrive, XboxController xbox, A05Constants.DriverSettings driver) {
-        super(swerveDrive);
+        super(swerveDrive, xbox, driver);
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
     }

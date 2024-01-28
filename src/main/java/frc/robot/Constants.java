@@ -8,8 +8,8 @@ package frc.robot;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.subsystems.PhotonCameraWrapper;
+import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
-import org.a05annex.util.AngleUnit;
 import org.photonvision.PhotonCamera;
 
 /**
@@ -33,7 +33,8 @@ public final class Constants extends A05Constants
     public static final boolean HAS_LIMELIGHT = false;
 
 
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 0.127, new AngleD(AngleUnit.DEGREES, 45));
+    //TODO: declare camera name
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"));
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
@@ -60,24 +61,24 @@ public final class Constants extends A05Constants
      *
      * These settings are loaded into {@link #ROBOT_SETTINGS_LIST} during {@link Robot#robotInit()}
      */
-    public static final A05Constants.RobotSettings[] ROBOT_SETTINGS = {
-            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
+    public static final RobotSettings[] ROBOT_SETTINGS = {
+            new RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
                     2.723, 2.448, 1.026,0.9650),
-            new A05Constants.RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
+            new RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
                     0.969, 5.039, 1.026, 0.9164)
     };
 
-    public static final A05Constants.AutonomousPath[] AUTONOMOUS_PATHS = {
-            new A05Constants.AutonomousPath("Sample Path", 0, "samplePath.json")
+    public static final AutonomousPath[] AUTONOMOUS_PATHS = {
+            new AutonomousPath("Sample Path", 0, "samplePath.json")
     };
 
-    public static final A05Constants.DriverSettings[] DRIVER_SETTINGS = {
+    public static final DriverSettings[] DRIVER_SETTINGS = {
             new DriverSettings("programmer", 0)
     };
 
-    public static void setAprilTagSetDictionary() {
-        aprilTagSetDictionary.put("example", new AprilTagSet(new int[] {1, 2}, new AngleD(AngleUnit.DEGREES, 0), 1.0));
-        aprilTagSetDictionary.put("example 2", new AprilTagSet(new int[] {3, 4}, 1.0));
+    public static void setAprilTagPositionParametersDictionary() {
+        aprilTagPositionParametersDictionary.put("example", new AprilTagPositionParameters(1.0,
+                1.0, 1.0, 1.0, new int[] {1, 2, 3}, new AngleD(AngleConstantD.ZERO)));
     }
 
 
