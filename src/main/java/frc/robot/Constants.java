@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.subsystems.PhotonCameraWrapper;
 import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
+import org.jetbrains.annotations.NotNull;
 import org.photonvision.PhotonCamera;
 
 /**
@@ -34,7 +35,7 @@ public final class Constants extends A05Constants
 
 
     //TODO: declare camera name
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"));
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 4, new AngleD());
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
@@ -72,13 +73,48 @@ public final class Constants extends A05Constants
             new AutonomousPath("Sample Path", 0, "samplePath.json")
     };
 
-    public static final DriverSettings[] DRIVER_SETTINGS = {
-            new DriverSettings("programmer", 0)
+    public static final SettableDriveSettings[] DRIVER_SETTINGS = {
+            new SettableDriveSettings("programmer", 0)
     };
 
-    public static void setAprilTagPositionParametersDictionary() {
-        aprilTagPositionParametersDictionary.put("example", new AprilTagPositionParameters(1.0,
-                1.0, 1.0, 1.0, new int[] {1, 2, 3}, new AngleD(AngleConstantD.ZERO)));
+
+    public static class SettableDriveSettings extends DriverSettings {
+
+        public SettableDriveSettings(@NotNull String driverName, int id) {
+            super(driverName, id);
+        }
+
+        public void setDriveSpeedSensitivity(double driveSpeedSensitivity) {
+            this.driveSpeedSensitivity = driveSpeedSensitivity;
+        }
+
+        public void setDriveSpeedGain(double driveSpeedGain) {
+            this.driveSpeedGain = driveSpeedGain;
+        }
+
+        public void setRotateSensitivity(double rotateSensitivity) {
+            this.rotateSensitivity = rotateSensitivity;
+        }
+
+        public void setRotateGain(double rotateGain) {
+            this.rotateGain = rotateGain;
+        }
+
+        public void setBoostGain(double boostGain) {
+            this.boostGain = boostGain;
+        }
+
+        public void setSlowGain(double slowGain) {
+            this.slowGain = slowGain;
+        }
+
+        public void setDriveSpeedMaxInc(double driveSpeedMaxInc) {
+            this.driveSpeedMaxInc = driveSpeedMaxInc;
+        }
+
+        public void setRotateMaxInc(double rotateMaxInc) {
+            this.rotateMaxInc = rotateMaxInc;
+        }
     }
 
 
