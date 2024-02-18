@@ -2,10 +2,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants;
 import org.a05annex.frc.A05Constants;
+import org.a05annex.util.Utl;
 
 
 public class DriveTuneCommand extends Command {
@@ -41,6 +43,14 @@ public class DriveTuneCommand extends Command {
 
     private int lockOut = 0;
 
+
+    double speedGain = driver.getDriveSpeedGain();
+    double rotateGain = driver.getRotateGain();
+    double speedSensitivity = driver.getDriveSpeedSensitivity();
+    double rotateSensitivity = driver.getRotateSensitivity();
+    double speedInc = driver.getDriveSpeedMaxInc();
+    double rotateInc = driver.getRotateMaxInc();
+
     public DriveTuneCommand() {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
@@ -66,65 +76,97 @@ public class DriveTuneCommand extends Command {
             return;
         }
 
+        // Y = speed gain
+        // B = rotate gain
+        // A = speed sensitivity
+        // X = rotate sensitivity
+        // Right bumper = speed accel/deccel
+        // Left bumper = rotate accel/deccel
+
         if(altY.getAsBoolean()) {
 
             if(altXbox.getPOV() == 0) {
-                driver.setDriveSpeedGain(driver.getDriveSpeedGain() + 0.05);
+                speedGain += 0.05;
                 lockOut = 0;
             } else if(altXbox.getPOV() == 180) {
-                driver.setDriveSpeedGain(driver.getDriveSpeedGain() - 0.05);
+                speedGain -= 0.05;
                 lockOut = 0;
             }
+
+            speedGain = Utl.clip(speedGain, 0.05, 1.0);
+            driver.setDriveSpeedGain(speedGain);
         }
 
         if(altB.getAsBoolean()) {
             if(altXbox.getPOV() == 0) {
-                driver.setRotateGain(driver.getRotateGain() + 0.05);
+                rotateGain += 0.05;
                 lockOut = 0;
             } else if(altXbox.getPOV() == 180) {
-                driver.setRotateGain(driver.getRotateGain() - 0.05);
+                rotateGain -= 0.05;
                 lockOut = 0;
             }
+
+            rotateGain = Utl.clip(rotateGain, 0.05, 1.0);
+            driver.setRotateGain(rotateGain);
         }
 
         if(altA.getAsBoolean()) {
             if(altXbox.getPOV() == 0) {
-                driver.setDriveSpeedSensitivity(driver.getDriveSpeedSensitivity() + 0.05);
+                speedSensitivity += 0.05;
                 lockOut = 0;
             } else if(altXbox.getPOV() == 180) {
-                driver.setDriveSpeedSensitivity(driver.getDriveSpeedSensitivity() - 0.05);
+                speedSensitivity -= 0.05;
                 lockOut = 0;
             }
+
+            speedSensitivity = Utl.clip(speedSensitivity, 0.05, 4.0);
+            driver.setDriveSpeedSensitivity(speedSensitivity);
         }
 
         if(altX.getAsBoolean()) {
             if(altXbox.getPOV() == 0) {
-                driver.setRotateSensitivity(driver.getRotateSensitivity() + 0.05);
+                rotateSensitivity += 0.05;
                 lockOut = 0;
             } else if(altXbox.getPOV() == 180) {
-                driver.setRotateSensitivity(driver.getRotateSensitivity() - 0.05);
+                rotateSensitivity -= 0.05;
                 lockOut = 0;
             }
-        }
 
-        if(altLeftBumper.getAsBoolean()) {
-            if(altXbox.getPOV() == 0) {
-                driver.setRotateMaxInc(driver.getRotateMaxInc() + 0.01);
-                lockOut = 0;
-            } else if(altXbox.getPOV() == 180) {
-                driver.setRotateMaxInc(driver.getRotateMaxInc() - 0.01);
-                lockOut = 0;
-            }
+            rotateSensitivity = Utl.clip(rotateSensitivity, 0.05, 4.0);
+            driver.setRotateSensitivity(rotateSensitivity);
         }
 
         if(altRightBumper.getAsBoolean()) {
             if(altXbox.getPOV() == 0) {
-                driver.setDriveSpeedMaxInc(driver.getDriveSpeedMaxInc() + 0.01);
+                speedInc += 0.005;
                 lockOut = 0;
             } else if(altXbox.getPOV() == 180) {
-                driver.setDriveSpeedMaxInc(driver.getDriveSpeedMaxInc() - 0.01);
+                speedInc -= 0.005;
                 lockOut = 0;
             }
+
+            speedInc = Utl.clip(speedInc, 0.005, 1.0);
+            driver.setDriveSpeedMaxInc(speedInc);
         }
+
+        if(altLeftBumper.getAsBoolean()) {
+            if(altXbox.getPOV() == 0) {
+                rotateInc += 0.005;
+                lockOut = 0;
+            } else if(altXbox.getPOV() == 180) {
+                rotateInc -= 0.005;
+                lockOut = 0;
+            }
+
+            rotateInc = Utl.clip(rotateInc, 0.005, 1.0);
+            driver.setRotateMaxInc(rotateInc);
+        }
+
+        SmartDashboard.putNumber("speed gain", driver.getDriveSpeedGain());
+        SmartDashboard.putNumber("rotate gain", driver.getRotateGain());
+        SmartDashboard.putNumber("speed sensitivity", driver.getDriveSpeedSensitivity());
+        SmartDashboard.putNumber("rotate sensitivity", driver.getRotateSensitivity());
+        SmartDashboard.putNumber("speed inc", driver.getDriveSpeedMaxInc());
+        SmartDashboard.putNumber("rotate inc", driver.getRotateMaxInc());
     }
 }

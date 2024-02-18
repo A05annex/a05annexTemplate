@@ -41,7 +41,7 @@ public class Robot extends A05Robot
         // TODO: If you are having trouble debugging an issue related to the a05annexLibrary, setting this to true -
         // TODO: i.e. uncommenting the following line, will add a lot of debug logging to the console output, and
         // TODO: may help you determine what is really happening.
-        Constants.setPrintDebug(true);
+        Constants.setPrintDebug(false);
 
         // update dictionary with all needed values
 
@@ -67,7 +67,7 @@ public class Robot extends A05Robot
     @Override
     public void disabledPeriodic() {
         //SmartDashboard.putNumber("Heading", NavX.getInstance().getHeadingInfo().expectedHeading.getDegrees());
-        DriveSubsystem.getInstance().printAllAngles();
+        //DriveSubsystem.getInstance().printAllAngles();
     }
     
     
@@ -100,7 +100,7 @@ public class Robot extends A05Robot
     public void teleopPeriodic() {
         super.teleopPeriodic();
 
-        SmartDashboard.putNumber("sampleMotorPosition", SampleMotorSubsystem.getInstance().getPosition());
+        //SmartDashboard.putNumber("sampleMotorPosition", SampleMotorSubsystem.getInstance().getPosition());
     }
     
     @Override
