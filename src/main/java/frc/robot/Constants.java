@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.subsystems.PhotonCameraWrapper;
 import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
+import org.a05annex.util.AngleUnit;
 import org.photonvision.PhotonCamera;
 
 /**
@@ -34,7 +35,7 @@ public final class Constants extends A05Constants
 
 
     //TODO: declare camera name
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"));
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 1.0, new AngleD(AngleUnit.DEGREES,0.0));
 
     // kP for keeping drive at the same orientation
     public static double DRIVE_ORIENTATION_kP = 1.2;
@@ -77,8 +78,8 @@ public final class Constants extends A05Constants
     };
 
     public static void setAprilTagPositionParametersDictionary() {
-        aprilTagPositionParametersDictionary.put("example", new AprilTagPositionParameters(1.0,
-                1.0, 1.0, 1.0, new int[] {1, 2, 3}, new AngleD(AngleConstantD.ZERO)));
+        aprilTagSetDictionary.put("Field Heading Example", new AprilTagSet(new int[]{1}, new int[]{2}, 1.0, new AngleD(AngleUnit.DEGREES, 90), new AngleD(AngleUnit.DEGREES, -90.0)));
+        aprilTagSetDictionary.put("Face Target Example", new AprilTagSet(new int[]{3}, new int[]{4}, 1.0));
     }
 
 

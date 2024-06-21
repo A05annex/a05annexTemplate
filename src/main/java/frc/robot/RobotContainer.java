@@ -33,7 +33,7 @@ public class RobotContainer extends A05RobotContainer
     {
         super();
         // finish swerve drive initialization for this specific robt.
-        driveCommand = new DriveCommand(driveSubsystem, driveXbox, driver);
+        driveCommand = new DriveCommand(driveSubsystem);
 
         speedCachedSwerve.setDriveSubsystem(driveSubsystem);
         speedCachedSwerve.setCacheLength(1000);
