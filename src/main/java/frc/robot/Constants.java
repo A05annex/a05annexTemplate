@@ -8,7 +8,6 @@ package frc.robot;
 import org.a05annex.frc.A05Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.a05annex.frc.subsystems.PhotonCameraWrapper;
-import org.a05annex.util.AngleConstantD;
 import org.a05annex.util.AngleD;
 import org.a05annex.util.AngleUnit;
 import org.photonvision.PhotonCamera;
@@ -30,15 +29,28 @@ public final class Constants extends A05Constants
     }
 
     //TODO: Set which cameras you have
+    @SuppressWarnings("unused")
     public static final boolean HAS_USB_CAMERA = false;
-    public static final boolean HAS_LIMELIGHT = false;
+    @SuppressWarnings("unused")
+	public static final boolean HAS_LIMELIGHT = false;
 
 
     //TODO: declare camera name
     public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 1.0, new AngleD(AngleUnit.DEGREES,0.0));
 
+    //TODO: write a function to adjust the reported X from photonvision to the real x value
+    public static double xCorrectionFunction(double reportedX) {
+        return reportedX;
+    }
+
+    //TODO: write a function to adjust the reported Y from photonvision to the real Y value
+    public static double yCorrectionFunction(double reportedY) {
+        return reportedY;
+    }
+
+
     // kP for keeping drive at the same orientation
-    public static double DRIVE_ORIENTATION_kP = 1.2;
+    public static final double DRIVE_ORIENTATION_kP = 1.2;
 
     // for practice, length and width from center of the wheels, in m (note chassis is 30" square,
     // the bolt pattern is 29" square, wheels are 2.75" in from the bolt pattern or centered on the
@@ -55,18 +67,16 @@ public final class Constants extends A05Constants
      * the yearly competition, and is generally not drivable between the introduction of the competition and a
      * week or two before the first competition because all the competition-specific appendages are being built
      * and assembled to it.
-     *
      * The <i>competition</i> robot is the index 0 entry in the list, so it does not require any changes to the
      * Roborio. The <i>practice</i> robot requires a jumper on the digital input port 5 that connects the signal
      * pin to ground. This convention was chosen to minimize the things that could go wrong on the competition robot.
-     *
      * These settings are loaded into {@link #ROBOT_SETTINGS_LIST} during {@link Robot#robotInit()}
      */
     public static final RobotSettings[] ROBOT_SETTINGS = {
-            new RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
-                    2.723, 2.448, 1.026,0.9650),
+            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 5.0974, 1.2225,
+                    0.9817, 4.9839, 1.0, 0.9650),
             new RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
-                    0.969, 5.039, 1.026, 0.9164)
+                    0.969, 5.039, 1.0, 0.9164)
     };
 
     public static final AutonomousPath[] AUTONOMOUS_PATHS = {

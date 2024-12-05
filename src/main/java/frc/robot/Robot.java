@@ -21,9 +21,7 @@ import java.util.Collections;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends A05Robot
-{
-    
+public class Robot extends A05Robot {
     /**
      * This method is run when the robot is first started up and should be used for any
      * initialization code.
@@ -37,14 +35,18 @@ public class Robot extends A05Robot
 
         // Set the drive constants that are specific to this swerve geometry.
         // Some drive geometry is passed in RobotContainer's constructor
-        Constants.setDriveOrientationkp(Constants.DRIVE_ORIENTATION_kP);
+        Constants.setDriveOrientationKp(Constants.DRIVE_ORIENTATION_kP);
         // TODO: If you are having trouble debugging an issue related to the a05annexLibrary, setting this to true -
         // TODO: i.e. uncommenting the following line, will add a lot of debug logging to the console output, and
         // TODO: may help you determine what is really happening.
-        Constants.setPrintDebug(true);
+        Constants.setPrintDebug(false);
 
         // update dictionary with all needed values
         Constants.setAprilTagPositionParametersDictionary();
+
+        // Set the camera correction functions. This accounts for error in the reported distances from PhotonVision
+        Constants.CAMERA.setXCorrectionFunction(Constants::xCorrectionFunction);
+        Constants.CAMERA.setYCorrectionFunction(Constants::yCorrectionFunction);
 
         // Load the robot settings list
         Collections.addAll(A05Constants.ROBOT_SETTINGS_LIST,Constants.ROBOT_SETTINGS);
@@ -58,52 +60,60 @@ public class Robot extends A05Robot
         setRobotContainer(new RobotContainer());
     }
     
-
-    
     /** This method is called once each time the robot enters Disabled mode. */
     @Override
-    public void disabledInit() {}
-    
-    
-    @Override
-    public void disabledPeriodic() {
-        //SmartDashboard.putNumber("Heading", NavX.getInstance().getHeadingInfo().expectedHeading.getDegrees());
-        DriveSubsystem.getInstance().printAllAngles();
+    public void disabledInit() {
+        super.disabledInit();
     }
-    
+
+    public void enableInit() {
+
+    }
     
     /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
     @Override
     public void autonomousInit()
     {
-        // Sets up autonomous command
+        // Sets up autonomous command in A05Robot
         super.autonomousInit();
-        //TODO: Add other things here (setting limelight pipeline)
+
+        enableInit();
     }
-    
-    
-    /** This method is called periodically during autonomous. */
-    @Override
-    public void autonomousPeriodic() {}
-    
-    
+
     @Override
     public void teleopInit()
     {
         // Cancels autonomous command
         super.teleopInit();
-        //TODO: Can add other things here
+
+        enableInit();
     }
-    
+
+    @Override
+    public void robotPeriodic() {
+        super.robotPeriodic();
+    }
+
+    @Override
+    public void disabledPeriodic() {
+        //SmartDashboard.putNumber("Heading", NavX.getInstance().getHeadingInfo().expectedHeading.getDegrees());
+        DriveSubsystem.getInstance().printAllAngles();
+    }
+
+    /** This method is called periodically during autonomous. */
+    @Override
+    public void autonomousPeriodic() {}
     
     /** This method is called periodically during operator control. */
     @Override
     public void teleopPeriodic() {
         super.teleopPeriodic();
 
+        // Example SmartDashboard telemetry call
         SmartDashboard.putNumber("sampleMotorPosition", SampleMotorSubsystem.getInstance().getPosition());
     }
-    
+
+
     @Override
     public void testInit()
     {
