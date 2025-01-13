@@ -1,6 +1,6 @@
 plugins {
     id "java"
-    id "edu.wpi.first.GradleRIO" version "2024.3.2"
+    id "edu.wpi.first.GradleRIO" version "2025.2.1"
 }
 
 java {
@@ -33,6 +33,8 @@ deploy {
                 frcStaticFileDeploy(getArtifactTypeClass('FileTreeArtifact')) {
                     files = project.fileTree('src/main/deploy')
                     directory = '/home/lvuser/deploy'
+                    deleteOldFiles = false // Change to true to delete files on roboRIO that no
+                                           // longer exist in deploy directory of this project
                 }
             }
         }
@@ -48,9 +50,8 @@ wpi.java.debugJni = false
 def includeDesktopSupport = false
 
 
-test {
-    useJUnitPlatform()
-}
+// Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
+// Also defines JUnit 5.
 
 dependencies {
 
@@ -59,6 +60,8 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    annotationProcessor wpi.java.deps.wpilibAnnotations()
 
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
@@ -77,12 +80,13 @@ dependencies {
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
 
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
 
-    implementation platform("org.junit:junit-bom:5.8.2")
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    testRuntimeOnly('org.a05annex:a05annexUtil:0.9.6')
+test {
+    useJUnitPlatform()
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
 }
 
 // Simulation configuration (e.g. environment variables).
@@ -94,14 +98,10 @@ wpi.sim.addDriverstation()
 // knows where to look for our Robot Class.
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    from sourceSets.main.allSource
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
-
-// Configure jar and deploy tasks
-deployArtifact.jarTask = jar
-wpi.java.configureExecutableTasks(jar)
-wpi.java.configureTestTasks(test)
 
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar

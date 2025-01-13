@@ -1,13 +1,13 @@
-# 2024 Crescendo: Competition Code
+# Template Project for 2025 REEFSCAPE
 
 ***Please revise the title, and replace the contents below with your competition or
 test code documentation when you start a new project by copying this Template. Below is
 the documentation of this project, not the robot code you create using this template.***
 
-# A05Annex Project Template for 2024 Crescendo
+# Template Project for 2025 REEFSCAPE
 
-* **version:** 2024.2.2 (runs with WPIlib 2024.2.1 and associated vendor deps; and a05annexRobot 2024.2.2)
-* **status:** first used for FRC **2023 Charged Up**, updated for **2024 Crescendo**
+* **version:** 2025.1.1 (runs with WPILib 2025.1.1 and associated vendor deps; and a05annexRobot 2025.0.1)
+* **status:** first used for FRC **2023 Charged Up**, updated for **2025 REEFSCAPE**
 * **comments:** This is the starting point for a swerve drive robot built on the
   [a05annexRobot](https://github.com/A05annex/a05annexRobot) Swerve Drive with NavX and PhotonVision
   robot code base.

@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
 
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkBaseConfigAccessor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.a05annex.frc.subsystems.SparkNeo;
@@ -39,7 +42,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
 		//noinspection ConstantValue
 		motor.setSoftLimits(minPosition, maxPosition);
         motor.setDirection(SparkNeo.Direction.REVERSE);
-        motor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        //motor.setIdleMode(SparkBaseConfig.IdleMode.kBrake);
         motor.setPositionPID(posKp, posKi, posKiZone, posKff);
         motor.setSmartMotion(smKp, smKi, smKiZone, smKff, smMaxRPM, smMaxDeltaRPMSec, smMinRPM, smError);
         motor.setRpmPID(rpmKp, rpmKi, rpmKiZone, rpmKff);
