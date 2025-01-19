@@ -1,10 +1,6 @@
 package frc.robot.subsystems;
 
 
-import com.revrobotics.spark.SparkBase;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig;
-import com.revrobotics.spark.config.SparkBaseConfigAccessor;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.a05annex.frc.subsystems.SparkNeo;
@@ -17,7 +13,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
     // Declare PID constants for smart motion control
     @SuppressWarnings("FieldCanBeLocal")
 	private final double smKp = 0.00005, smKi = 0.000, smKiZone = 0.0, smKff = 0.000156, smMaxRPM = 3000.0,
-            smMaxDeltaRPMSec = 3000.0, smMinRPM = 0.0, smError = 0.1;
+            smMaxDeltaRPMSec = 3000.0, smError = 0.1;
 
     // Declare PID constants for position control
     @SuppressWarnings("FieldCanBeLocal")
@@ -44,7 +40,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
         motor.setDirection(SparkNeo.Direction.REVERSE);
         //motor.setIdleMode(SparkBaseConfig.IdleMode.kBrake);
         motor.setPositionPID(posKp, posKi, posKiZone, posKff);
-        motor.setSmartMotion(smKp, smKi, smKiZone, smKff, smMaxRPM, smMaxDeltaRPMSec, smMinRPM, smError);
+        motor.setMAXMotionPosition(smKp, smKi, smKiZone, smKff, smMaxRPM, smMaxDeltaRPMSec, smError);
         motor.setRpmPID(rpmKp, rpmKi, rpmKiZone, rpmKff);
         motor.endConfig();
         motor.setEncoderPosition(startPosition);
@@ -52,7 +48,7 @@ public class SampleMotorSubsystem extends SubsystemBase {
 
     @SuppressWarnings("unused")
     public void goToSmartMotionPosition(double position) {
-        motor.setSmartMotionTarget(position);
+        motor.setTargetMAXMotionPosition(position);
     }
 
     @SuppressWarnings("unused")
