@@ -88,17 +88,8 @@ public final class Constants extends A05Constants
     };
 
     public static void setAprilTagPositionParametersDictionary() {
-        aprilTagSetDictionary.put("left coral station", new AprilTagSet(new int[]{1}, new int[]{13}, new AngleD(AngleUnit.DEGREES, -126)));
-        aprilTagSetDictionary.put("right coral station", new AprilTagSet(new int[]{2}, new int[]{12}, new AngleD(AngleUnit.DEGREES, 126)));
-        aprilTagSetDictionary.put("close center reef", new AprilTagSet(new int[]{7}, new int[]{18}, new AngleD(AngleUnit.DEGREES, 0)));
-        aprilTagSetDictionary.put("far center reef", new AprilTagSet(new int[]{10}, new int[]{21}, new AngleD(AngleUnit.DEGREES, 180)));
-        aprilTagSetDictionary.put("close left reef", new AprilTagSet(new int[]{6}, new int[]{19}, new AngleD(AngleUnit.DEGREES, -60)));
-        aprilTagSetDictionary.put("far left reef", new AprilTagSet(new int[]{11}, new int[]{20}, new AngleD(AngleUnit.DEGREES, 120)));
-        aprilTagSetDictionary.put("close right reef", new AprilTagSet(new int[]{8}, new int[]{17}, new AngleD(AngleUnit.DEGREES, 60)));
-        aprilTagSetDictionary.put("far right reef", new AprilTagSet(new int[]{9}, new int[]{22}, new AngleD(AngleUnit.DEGREES, -120)));
-        aprilTagSetDictionary.put("left cage", new AprilTagSet(new int[]{5}, new int[]{14}, new AngleD(AngleUnit.DEGREES, 0)));
-        aprilTagSetDictionary.put("right cage", new AprilTagSet(new int[]{4}, new int[]{15}, new AngleD(AngleUnit.DEGREES, 0)));
-        aprilTagSetDictionary.put("processor", new AprilTagSet(new int[]{3}, new int[]{16}, new AngleD(AngleUnit.DEGREES, 90)));
+        aprilTagSetDictionary.put("Field Heading Example", new AprilTagSet(new int[]{1}, new int[]{2}, new AngleD(AngleUnit.DEGREES, 90), new AngleD(AngleUnit.DEGREES, -90.0)));
+        aprilTagSetDictionary.put("Face Target Example", new AprilTagSet(new int[]{3}, new int[]{4}));
     }
 
 
