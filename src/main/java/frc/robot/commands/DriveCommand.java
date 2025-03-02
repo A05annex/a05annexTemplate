@@ -1,7 +1,5 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import org.a05annex.frc.A05Constants;
 import org.a05annex.frc.commands.A05DriveCommand;
 import org.a05annex.frc.subsystems.ISwerveDrive;
 
@@ -13,9 +11,8 @@ public class DriveCommand extends A05DriveCommand {
     /**
      * Default command for DriveSubsystem. Left stick moves the robot field-relatively, and right stick X rotates.
      * Contains driver constants for sensitivity, gain, and deadband.
-     * @param xbox (XboxController) The drive xbox controller.
      */
-    public DriveCommand(ISwerveDrive swerveDrive, XboxController xbox, A05Constants.DriverSettings driver) {
+    public DriveCommand(ISwerveDrive swerveDrive) {
         super(swerveDrive);
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)

@@ -26,7 +26,7 @@ public class RobotContainer extends A05RobotContainer
     // The robot's subsystems and commands are defined here...
     // NavX, DriveSubsystem, DriveXbox have already been made in A05RobotContainer
     //TODO: Add any additional subsystems and commands here
-    SpeedCachedSwerve speedCachedSwerve = SpeedCachedSwerve.getInstance();
+    final SpeedCachedSwerve speedCachedSwerve = SpeedCachedSwerve.getInstance();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -34,7 +34,10 @@ public class RobotContainer extends A05RobotContainer
     {
         super();
         // finish swerve drive initialization for this specific robt.
-        driveCommand = new DriveCommand(driveSubsystem, driveXbox, Constants.getDriver());
+        //TODO: Ensure you are using the correct drive iSwerveDrive subsystem version. If you do not need the cache you
+        // can use driveSubsystem directly, however if you need the cache but don't use speedCachedSwerve, you will
+        // receive cache errors when trying to retrieve displacement because the cache will be empty.
+        driveCommand = new DriveCommand(speedCachedSwerve);
 
         speedCachedSwerve.setDriveSubsystem(driveSubsystem);
         speedCachedSwerve.setCacheLength(1000);
