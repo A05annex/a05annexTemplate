@@ -39,10 +39,10 @@ public class Robot extends A05Robot {
         // TODO: If you are having trouble debugging an issue related to the a05annexLibrary, setting this to true -
         // TODO: i.e. uncommenting the following line, will add a lot of debug logging to the console output, and
         // TODO: may help you determine what is really happening.
-        Constants.setPrintDebug(true);
+        Constants.setPrintDebug(false);
 
         // update dictionary with all needed values
-        Constants.setAprilTagPositionParametersDictionary();
+        //Constants.setAprilTagPositionParametersDictionary();
 
         // Set the camera correction functions. This accounts for error in the reported distances from PhotonVision
         Constants.CAMERA.setXCorrectionFunction(Constants::xCorrectionFunction);

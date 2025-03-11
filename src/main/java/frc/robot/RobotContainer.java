@@ -37,15 +37,18 @@ public class RobotContainer extends A05RobotContainer
         //TODO: Ensure you are using the correct drive iSwerveDrive subsystem version. If you do not need the cache you
         // can use driveSubsystem directly, however if you need the cache but don't use speedCachedSwerve, you will
         // receive cache errors when trying to retrieve displacement because the cache will be empty.
-        driveCommand = new DriveCommand(speedCachedSwerve);
-
         speedCachedSwerve.setDriveSubsystem(driveSubsystem);
         speedCachedSwerve.setCacheLength(1000);
+        speedCachedSwerve.setLatencyOffset(0.0);
 
         speedCachedSwerve.setDriveGeometry(robotSettings.length, robotSettings.width,
                 robotSettings.rf, robotSettings.rr,
                 robotSettings.lf, robotSettings.lr,
                 robotSettings.maxSpeedCalibration);
+
+        // finish swerve drive initialization for this specific robt.
+        driveCommand = new DriveCommand(speedCachedSwerve);
+
 
         driveSubsystem.setDefaultCommand(driveCommand);
 

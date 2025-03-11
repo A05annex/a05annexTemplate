@@ -38,7 +38,7 @@ public final class Constants extends A05Constants
 
 
     //TODO: declare camera name
-    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 1.0, new AngleD(AngleUnit.DEGREES,0.0));
+    public static final PhotonCameraWrapper CAMERA = new PhotonCameraWrapper(new PhotonCamera("IMX219"), 0.0, 0.0, 0.0);
 
     //TODO: write a function to adjust the reported X from photonvision to the real x value
     public static double xCorrectionFunction(double reportedX) {
@@ -75,8 +75,8 @@ public final class Constants extends A05Constants
      * These settings are loaded into {@link #ROBOT_SETTINGS_LIST} during {@link Robot#robotInit()}
      */
     public static final RobotSettings[] ROBOT_SETTINGS = {
-            new RobotSettings(0, "Competition", 0.5461, 0.5461, 2.700, 1.161,
-                    2.723, 2.448, 1.026,0.9650),
+            new A05Constants.RobotSettings(0, "Competition", 0.5461, 0.5461, 5.108, 4.085,
+                    0.983, 5.041, 1.0, 0.9406),
             new RobotSettings(1, "Practice", 0.5969, 0.5969, 5.240, 5.654,
                     0.969, 5.039, 1.0, 0.9164)
     };
@@ -85,8 +85,8 @@ public final class Constants extends A05Constants
             new AutonomousPath("Sample Path", 0, "samplePath.json")
     };
 
-    public static final DriverSettings[] DRIVER_SETTINGS = {
-            new DriverSettings("programmer", 0)
+    public static final SettableDriveSettings[] DRIVER_SETTINGS = {
+            new SettableDriveSettings("programmer", 0)
     };
 
 
